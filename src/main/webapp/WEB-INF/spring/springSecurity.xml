@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bean:beans xmlns:bean="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://www.springframework.org/schema/security"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd">
+	<http auto-config="true">
+		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/logout" access="permitAll" />
+		<intercept-url pattern="/acciform" access="hasRole('CLIENTE')or hasRole('ADMIN')" />
+		<intercept-url pattern="/aseform" access="hasRole('CLIENTE')or hasRole('PROFESIONAL')"/>
+		<intercept-url pattern="/viewcli" access="hasRole('ADMIN')or hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/cliform" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/viewpago" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/pagoform" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/pagoeditform" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/notiatraso" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/VisualizarActividad" access="hasRole('ADMIN') or hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/empform" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/viewemp" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/empeditform" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/listcli" access="hasRole('ADMIN')or hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/cantacci" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/viewacci" access="hasRole('ADMIN')or hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/accieditform" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/viewase" access="hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/aseeditform" access="hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/viewvisita" access="hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/visitaform" access="hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/viewcheq" access="hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/cheqform" access="hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/capaform" access="hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/viewcapa" access="hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/capaeditform" access="hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/viewmejor" access="hasRole('PROFESIONAL')" />
+		<intercept-url pattern="/mejorform" access="hasRole('ADMIN')or hasRole('PROFESIONAL')" />
+		<access-denied-handler error-page="/403"/>
+		
+ 		<form-login 
+ 			login-page="/login"
+ 			authentication-failure-url="/error" 
+ 			username-parameter="username" 
+ 			password-parameter="password" 
+			/> 
+ 			<csrf/>
+ 			<logout logout-success-url="/login" />
+		</http>
+		
+		<authentication-manager>
+		 <authentication-provider>
+		 <user-service>
+		 <user name="Catalina" password="{noop}1234" authorities="ROLE_ADMIN"/>
+		 <user name="Rodrigo" password="{noop}5678" authorities="ROLE_PROFESIONAL"/>
+		 <user name="Jorge" password="{noop}9012" authorities="ROLE_CLIENTE"/>
+		 </user-service>
+		 </authentication-provider>
+		</authentication-manager>
+		</bean:beans>
+
+	
